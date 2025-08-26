@@ -8,7 +8,7 @@ import time
 # Create keyboard object
 kbd = Keyboard(usb_hid.devices)
 
-# Button pins
+# Button pins / Makes sure you set to the pins that you wired
 button_pins = [board.GP0, board.GP1, board.GP2, \
                board.GP3, board.GP4, board.GP5]
 buttons = []
@@ -18,7 +18,7 @@ for pin in button_pins:
     btn.pull = digitalio.Pull.UP
     buttons.append(btn)
 
-# LED pins
+# LED pins / set to the pins that you wired
 led_pins = [board.GP6, board.GP7, board.GP8]
 leds = []
 for pin in led_pins:
@@ -34,4 +34,5 @@ while True:
             kbd.send(Keycode.CONTROL, Keycode.ALT, \
                      getattr(Keycode, f"ONE") + i)
             time.sleep(0.2)
+
             leds[i % lens(leds)].value = False
